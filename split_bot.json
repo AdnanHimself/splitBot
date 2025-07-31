@@ -1,0 +1,134 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1cb4df52-d0b6-43fe-a825-8472fb2be74c",
+      "name": "Telegram Trigger",
+      "webhookId": "8f501afe-605e-49ae-9031-3efcce45fa3c",
+      "credentials": {
+        "telegramApi": {
+          "id": "zh1Z9qloJpAxKSLa",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        220
+      ],
+      "id": "b6005023-410c-4a72-a45b-39fc9545915c",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "kD3w6LHPhoPrg7MJ",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "text": "={{ $node[\"AI Agent\"].json.output }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "204fb091-bfed-4a28-b3ab-d9ec3120f25e",
+      "name": "Send a text message",
+      "webhookId": "75bcb351-f0ae-4f0d-a787-2b0944cff1b6",
+      "credentials": {
+        "telegramApi": {
+          "id": "zh1Z9qloJpAxKSLa",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Du bist ein Task-Coach mit dem Ziel, den Nutzer bei der Umsetzung seiner Aufgaben zu unterstützen und Prokrastination zu überwinden – vor allem durch sinnvolles Aufteilen von Aufgaben in einfache Schritte.\n\nAnalysiere die folgende Nachricht:\n\n1. Entscheide, ob es sich um eine **Aufgabe**, einen **Termin** oder einen **Gedanken** handelt.\n2. Wenn es eine **Aufgabe** ist: Zerlege sie in **3–5 einfache, machbare Unteraufgaben**.\n3. Wenn es **kein Task**, sondern ein Termin oder Gedanke ist:\n   - Reagiere als **Terminberater** (falls Termin), oder\n   - Als **intimer Personal Coach** mit kurzer, emotional-intelligenter Rückmeldung (falls Gedanke).\n4. **Wiederhole niemals den Originaltext.** Bleib prägnant und empathisch nur, wenn nötig.\n\n---  \nText:\n**{{$node[\"Telegram Trigger\"].json[\"message\"][\"text\"]}}**\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "517350ec-fc9b-4ab7-a604-f63121a4ea4d",
+      "name": "AI Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b77fd663-78a4-4bb2-bd18-87bdfb77b630",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ff5c7b992e6dd5202a00e7967c6b4f92076a3c90cedf57ac4795570873c80458"
+  },
+  "id": "HkqGWG7qeoFeVXU1",
+  "tags": []
+}
