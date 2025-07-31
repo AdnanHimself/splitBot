@@ -33,7 +33,6 @@ Ein kleines **No-Code/Low-Code-Projekt** mit n8n, das Telegram-Nachrichten entge
 2. **ngrok-Tunnel starten**  
    ```bash
    ngrok http 5678
-Merke dir die HTTPS-URL (z.B. https://abc123.ngrok-free.app).
 
 3. **ngrok-URL in docker-compose.yml eintragen**
 environment:
@@ -41,19 +40,16 @@ environment:
   - WEBHOOK_URL=https://abc123.ngrok-free.app
   - N8N_EDITOR_BASE_URL=https://abc123.ngrok-free.app
 
-4. Container starten
+4. **Container starten**
    ```bash
-  docker compose up -d
-  Workflow importieren
+   docker compose up -d
 
-Öffne http://localhost:5678
+5. **Workflow importieren**
+   Öffne http://localhost:5678
+   Import → Datei splitBot_n8n_workflow.json auswählen
+   Workflow speichern und Active schalten
 
-„+“ → Import → Datei splitBot_n8n_workflow.json auswählen
+6. **Bot im Chat aktivieren**
+   /start an deinen Bot senden
 
-Workflow speichern und Active schalten
-
-Bot im Chat aktivieren
-
-/start an deinen Bot senden
-
-Beliebige Nachricht, z.B. Split: Projektplan erstellen
+7. **Beliebige Nachricht, z.B. Split: Projektplan erstellen**
