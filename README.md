@@ -44,3 +44,6 @@ docker compose up -d
 # 5. Bot im Chat aktivieren  
 #    /start an deinen Bot senden  
 #    Split: Projektplan erstellen
+```
+## Screenshot des Workflows
+![Workflow Canvas](./splitBot_workflow_screenshot.png)
