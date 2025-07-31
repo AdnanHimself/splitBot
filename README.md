@@ -36,9 +36,9 @@ Ein kleines **No-Code/Low-Code-Projekt** mit n8n, das Telegram-Nachrichten entge
 
 3. **ngrok-URL in docker-compose.yml eintragen**
 environment:
-  - N8N_PROTOCOL=https
-  - WEBHOOK_URL=https://abc123.ngrok-free.app
-  - N8N_EDITOR_BASE_URL=https://abc123.ngrok-free.app
+     - N8N_PROTOCOL=https
+     - WEBHOOK_URL=https://abc123.ngrok-free.app
+     - N8N_EDITOR_BASE_URL=https://abc123.ngrok-free.app
 
 4. **Container starten**
    ```bash
