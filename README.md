@@ -46,5 +46,5 @@ docker compose up -d
 #    Split: Create project plan
 ```
 ---
-## Screenshot of the Workflows
+## Screenshot of the Workflow
 ![Workflow Canvas](./splitBot_workflow_screenshot.png)
